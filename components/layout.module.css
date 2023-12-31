@@ -1,0 +1,14 @@
+.body {
+  height: 100vh;
+  font-family: "Calibre","Inter","San Francisco","SF Pro Text",-apple-system,system-ui,sans-serif;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  margin: 0 0 1rem 0 !important;
+}

@@ -1,0 +1,19 @@
+.contact {
+  margin-top: 15rem;
+  width: 70%;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button {
+  color: orangered !important;
+  border-color: blueviolet !important;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    width: 100%;
+  }
+}

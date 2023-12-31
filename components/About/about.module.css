@@ -1,0 +1,25 @@
+.about {
+    width: 70%;
+    min-height: 100vh;
+    letter-spacing: normal;
+    text-align: justify;
+}
+
+.listdiv {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 768px) {
+    .about {
+        width: 100%;
+        min-height: fit-content;
+        text-align: start;
+    }
+}
+
+@media (max-width: 992px){
+    .listdiv {
+        flex-direction: column;
+    }
+}

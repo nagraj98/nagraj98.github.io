@@ -1,0 +1,6 @@
+.themeButton {
+    border: none;
+    width: fit-content;
+    padding: 0;
+    min-width: 0 !important;
+}
