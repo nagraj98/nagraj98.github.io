@@ -8,7 +8,16 @@
 .listdiv {
     display: flex;
     flex-direction: row;
-}
+    align-items: center; 
+  }
+  
+.categoryText {
+    min-width: 150px; /* Adjust this width to match the longest category label */
+  }
+  
+.skillText {
+    flex: 1; /* Takes up the remaining space */
+  }
 
 @media (max-width: 768px) {
     .about {
