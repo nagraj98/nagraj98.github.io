@@ -1,0 +1,17 @@
+.customButton {
+    position: relative;
+    overflow: hidden;
+}
+  
+.customButton a {
+    color: transparent;
+    background: linear-gradient(45deg, orange, purple);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-decoration: none;
+}
+
+.button {
+    color: orangered !important;
+    border-color: blueviolet !important;
+  }

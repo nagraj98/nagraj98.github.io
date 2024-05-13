@@ -30,8 +30,8 @@ export default function Home() {
               <Work />
               <Projects />
               {/* <Education /> */}
-              <ChessPuzzle />
               <Contact />
+              <ChessPuzzle position="r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 2 3" />
               <div className={styles.footer}>
                 <div className={styles.line} />
                 <Text h5 css={{ color: "$gray700" }}>
@@ -48,9 +48,9 @@ export default function Home() {
               <About />
               <Work />
               <Projects />
-              {/* <ChessPuzzle /> */}
               {/* <Education /> */}
               <Contact />
+              {/* <ChessPuzzle position="r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 2 3" /> */}
             </Row>
             <Row className={styles.mowSocial}>
               <Social />

@@ -24,6 +24,8 @@ const NavItems = [
     title: "Contact",
     link: "#contact",
   },
+
+  { title: "ChessPuzzle", link: "#chesspuzzle" },
 ];
 
 export default function NavBar() {

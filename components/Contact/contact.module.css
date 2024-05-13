@@ -7,10 +7,7 @@
   justify-content: space-between;
 }
 
-.button {
-  color: orangered !important;
-  border-color: blueviolet !important;
-}
+
 
 @media (max-width: 768px) {
   .contact {
