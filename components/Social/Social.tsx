@@ -73,6 +73,16 @@ export default function Social() {
           priority
         />
       </a>
+
+      <a href="assets/nagraj_resume_May24.pdf" target="_blank">
+        <Image
+          src="/images/cv.svg"
+          height={20}
+          width={20}
+          alt="Resume"
+          priority
+        />
+      </a>
     </div>
   );
 }

@@ -21,6 +21,10 @@ const NavItems = [
     link: "#projects",
   },
   {
+    title: "Resume",
+    link: "assets/nagraj_resume_May24.pdf",
+  },
+  {
     title: "Contact",
     link: "#contact",
   },

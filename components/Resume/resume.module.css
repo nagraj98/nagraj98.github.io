@@ -1,0 +1,11 @@
+/* styles/global.css */
+#resume {
+    margin: 2rem 0;
+  }
+  
+iframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+  }
+  
