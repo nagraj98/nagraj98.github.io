@@ -25,6 +25,33 @@ export default function Social() {
           priority
         />
       </a>
+      <a
+        href="https://scholar.google.com/citations?user=0TEq0-IAAAAJ&hl=en&oi=ao"
+        target="_blank"
+        className={styles.mediaImg}
+      >
+        <Image
+          src="/images/gscholar.svg"
+          height={20}
+          width={20}
+          alt="GoogleScholar"
+          priority
+        />
+      </a>
+      <a
+        href="https://tinsandwich.medium.com/"
+        target="_blank"
+        className={styles.mediaImg}
+      >
+        <Image
+          src="/images/medium.svg"
+          height={20}
+          width={20}
+          alt="Medium"
+          priority
+        />
+      </a>
+
       <a href="https://github.com/nagraj98" target="_blank">
         <Image
           src="/images/github.svg"

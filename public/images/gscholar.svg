@@ -1,0 +1,5 @@
+<svg width="300px" height="300px" viewBox="0 0 300 300" role="img" xmlns="http://www.w3.org/2000/svg"><title>Google Scholar icon</title><linearGradient id="color">
+        <stop offset="-20%" stop-color="orange" />
+        <stop offset="50%" stop-color="purple" />
+    </linearGradient>
+  <path fill="url(#color)" d="M150 300a87.5 87.5 0 1 1 0 -175 87.5 87.5 0 0 1 0 175m0 -300L0 118.75l60.475 49.25A100 100 0 0 1 150 112.5a100 100 0 0 1 89.525 55.5L300 118.75z"/></svg>

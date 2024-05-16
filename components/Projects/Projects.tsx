@@ -14,18 +14,31 @@ export const tagTitles = {
 
 const list = [
   {
-    title: "Data Driven Marketing for GAP Inc.",
+    title: "Multimodal Meme Search Engine",
     description:
-      "Exploring data driven marketing techniques for fashion retail industry including market segmentation, customer sentiment analysis, financial data analysis and SERP analysis.",
+      "Developed a search engine using CLIP model for semantic search on meme images and text queries.",
+    tags: ["Python", "Pinecone", "CLIP"],
+    link: "https://github.com/nagraj98/build-n-learn/tree/main/pinecone_meme_search",
+  },
+  {
+    title: "LLM Powered Autonomous Marketing Agent",
+    description:
+      "Developed an LLM-powered agent to identify trends and generate platform-specific post ideas, boosting engagement by 25%.",
+    tags: ["Python", "LLMs", "Langchain", "LanceDB", "FastAPI"],
+    link: "https://github.com/nagraj98/llm-marketing-agent",
+  },
+  {
+    title: "Walmart M5 Sales Forecasting",
+    description:
+      "Forecasted 30K+ time series using sales, pricing, and temporal features, achieving a validation loss of 0.013.",
     tags: [
-      "Web Scraping",
-      "Selenium",
-      "Statistical analysis",
-      "Google Trends",
-      "GCP",
-      "Python",
+      "Time Series Forecasting",
+      "LSTM",
+      "XGBoost",
+      "Keras",
+      "Feature Engineering",
     ],
-    link: "#home",
+    link: "https://github.com/nagraj98/m5kaggle",
   },
   {
     title: "Decoding the 'Super' in AirBnb's Superhosts",
@@ -41,27 +54,71 @@ const list = [
       "Optimisation",
       "Python",
     ],
-    link: "#home",
+    link: "https://github.com/nagraj98/Airbnb_superhosts",
+  },
+  {
+    title: "LLMs for Automated Medical Documentation",
+    description:
+      "Hosted Llama-2 on AWS Sagemaker for zero-shot prompting and RAG, achieving WER of 0.86 on medical transcripts.",
+    tags: ["Prompt Engineering", "Python", "Sagemaker"],
+    link: "https://github.com/nagraj98/data4good",
+  },
+  {
+    title: "Data Driven Marketing for GAP Inc.",
+    description:
+      "Exploring data driven marketing techniques for fashion retail industry including market segmentation, customer sentiment analysis, financial data analysis and SERP analysis.",
+    tags: [
+      "Web Scraping",
+      "Selenium",
+      "Statistical analysis",
+      "Google Trends",
+      "GCP",
+      "Python",
+    ],
+    link: "https://github.com/nagraj98/gap_bigdata_case",
+  },
+
+  {
+    title: "Driver Performance Analysis Across F1 Circuits",
+    description:
+      "Maximizing the excitement in a Formula 1 Grand Prix with some network analysis and algorithmic magic",
+    tags: ["Graph Algorithms", "BFS", "Linear Programming", "Clustering"],
+    link: "https://github.com/nagraj98/fun_with_f1",
+  },
+
+  {
+    title: "Analysing clique behavior in academic settings",
+    description:
+      "Understanding relationships among a real-world collaboration network of researchers who have published General Relativity work in Arxiv",
+    tags: [
+      "Network analysis",
+      "Community Detection",
+      "Network Simulation",
+      "ERGM",
+      "R",
+    ],
+    link: "https://github.com/nagraj98/arxiv_networks_analysis",
+  },
+
+  {
+    title: "Key Opinion Leader Identification for Neurology",
+    description:
+      "Developed a data-driven approach using ML and NLP to identify and engage influential KOLs in neurology, enhancing market impact.",
+    tags: ["USgov APIs", "Business Analytics", "Machine Learning", "pandas"],
+    link: "https://github.com/nagraj98/pharma_KOL_identification",
   },
   {
     title: "Retail Theft Analysis",
     description:
       "Deep dive into analysing the surge in Retail theft for the cities of Chicago and San Francisco",
     tags: ["Tableau", "Data Visualisation"],
-    link: "#home",
+    link: "#projects",
   },
   {
     title: "The Fire Guide",
     description: "A Corpus calculator for financial independence",
     tags: ["ReactJS", "FastAPI", "Python"],
-    link: "#home",
-  },
-  {
-    title: "Personal Website",
-    description:
-      "Personal website to showcase my projects and work. Do have a look!",
-    tags: ["NextJS", "NextUI", "JS", "TS", "CSS", "HTML"],
-    link: "#home",
+    link: "https://github.com/nagraj98/The-Fire-Guide-FastAPI",
   },
 ];
 
@@ -86,7 +143,7 @@ export default function Projects() {
                     </Text>
                   </Grid>
                 </Grid.Container>
-                {/* <Link
+                <Link
                   //   icon
                   color="primary"
                   target="_blank"
@@ -98,7 +155,7 @@ export default function Projects() {
                     width={device == "lg" ? 30 : 20}
                     alt="Github"
                   />
-                </Link> */}
+                </Link>
               </Card.Header>
               <Card.Body css={{ py: "$2" }} className={styles.cardBody}>
                 <div className={styles.tagGroup}>
