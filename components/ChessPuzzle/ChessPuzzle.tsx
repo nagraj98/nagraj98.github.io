@@ -186,9 +186,8 @@ export default function ChessPuzzle() {
     <div id="chesspuzzle">
       <div>
         <GradientText
-          h2
           size={device == "lg" ? "$6xl" : "4xl"}
-          text="Chess Puzzle"
+          text="Puzzle - Mate in 1"
         />
 
         <div className={`${chessStyles.textcenter}`}>

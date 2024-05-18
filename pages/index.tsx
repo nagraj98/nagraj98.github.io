@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import Main from "../components/Main/Main";
 import NavBar from "../components/NavBar/NavBar";
 import Projects from "../components/Projects/Projects";
-import ChessPuzzle from "../components/ChessPuzzle/ChessPuzzle";
+// import ChessPuzzle from "../components/ChessPuzzle/ChessPuzzle";
 import Social from "../components/Social/Social";
 import Work from "../components/Work/Work";
 import styles from "./index.module.css";
@@ -30,7 +30,7 @@ export default function Home() {
               <Work />
               <Projects />
               {/* <Education /> */}
-              <ChessPuzzle />
+              {/* <ChessPuzzle /> */}
               <Contact />
               <div className={styles.footer}>
                 <div className={styles.line} />
