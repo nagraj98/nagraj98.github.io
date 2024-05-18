@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import * as ChessJS from "chess.js";
-import { useAppContext } from "../Context/AppContext";
-
-import GradientText from "../GradientText/GradientText";
-
 import { Button } from "@nextui-org/react";
-import buttonStyles from "../../styles/buttons.module.css";
-import chessStyles from "./chess.module.css";
+import { Chessboard } from "react-chessboard";
 
 const Chess = typeof ChessJS === "function" ? ChessJS : ChessJS.Chess;
 
-const Chessboard = dynamic(() => import("chessboardjsx"), { ssr: false });
+// const Chessboard = dynamic(() => import("chessboardjsx"), { ssr: false });
 
-// const ChessPuzzle: React.FC = () =>
-export default function ChessPuzzle() {
-  const device = useAppContext();
-
+const ChessPuzzle: React.FC = () => {
   const [game, setGame] = useState(new Chess());
   const [fen, setFen] = useState("");
   const [puzzles, setPuzzles] = useState([]);
@@ -52,16 +44,12 @@ export default function ChessPuzzle() {
     setFen(randomPuzzle.fen);
     setSelectedSquare(""); // Clear selection when new puzzle is loaded
     setOrientation(newGame.turn() === "w" ? "white" : "black"); // Set orientation based on turn
-    setMessage(""); // Clear message
-    setHighlightSquares({}); // Clear highlights
   };
 
   const resetPuzzle = () => {
     if (selectedPuzzle) {
       setGame(new Chess(selectedPuzzle.fen));
       setFen(selectedPuzzle.fen);
-      setMessage("");
-      setHighlightSquares({});
     }
   };
 
@@ -132,11 +120,7 @@ export default function ChessPuzzle() {
 
       if (game.isCheckmate()) {
         if (audio.checkmateSound) audio.checkmateSound.play();
-        // alert("Checkmate!");
-        // something;
-        setMessage(`Checkmate ! Wohooo`);
-      } else {
-        setMessage(`Good move, but there's one better ! Reset and try again`);
+        alert("Checkmate!");
       }
       return true;
     } catch (error) {
@@ -161,83 +145,42 @@ export default function ChessPuzzle() {
   };
 
   return (
-    <div id="chesspuzzle">
-      <div>
-        <GradientText
-          h2
-          size={device == "lg" ? "$6xl" : "4xl"}
-          text="Chess Puzzle"
-        />
-
-        <div className={`${chessStyles.textcenter}`}>
-          <p>
-            {orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play
-          </p>
-          <p>{message}</p>
-        </div>
-
-        <Chessboard
-          width={320}
-          position={fen}
-          onDrop={handleMove}
-          orientation={orientation} // Use the state value
-          darkSquareStyle={{ backgroundColor: "purple" }}
-          lightSquareStyle={{ backgroundColor: "orange" }}
-          onSquareClick={handleSquareClick}
-          draggable={true}
-          squareStyles={
-            selectedSquare
-              ? {
-                  [selectedSquare]: {
-                    backgroundColor: "rgba(255, 255, 0, 0.4)",
-                  }, // Highlight the selected square
-                  ...game
-                    .moves({ square: selectedSquare, verbose: true })
-                    .reduce(
-                      (styles, move) => ({
-                        ...styles,
-                        [move.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" }, // Highlight legal moves
-                      }),
-                      {}
-                    ),
-                }
-              : {}
-          }
-        />
-        <div className={`${chessStyles.bgrid}`}>
-          {/* <div className={chessStyles.buttonGrid}> */}
-          <Button
-            bordered
-            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-            onClick={resetPuzzle}
-          >
-            Reset
-          </Button>
-          <Button
-            bordered
-            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-            onClick={() => selectRandomPuzzle(puzzles)}
-          >
-            New
-          </Button>
-          <Button
-            bordered
-            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-            onClick={showHint}
-          >
-            Hint
-          </Button>
-          <Button
-            bordered
-            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-            onClick={showSolution}
-          >
-            Solution
-          </Button>
-        </div>
-      </div>
+    <div>
+      <p>
+        {orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play
+      </p>
+      <p>{message}</p>
+      <Chessboard position={game.fen()} onPieceDrop={handleMove} />;
+      {/* <Chessboard
+        width={320}
+        position={fen}
+        onDrop={handleMove}
+        orientation={orientation} // Use the state value
+        darkSquareStyle={{ backgroundColor: "purple" }}
+        lightSquareStyle={{ backgroundColor: "orange" }}
+        onSquareClick={handleSquareClick}
+        draggable={true}
+        squareStyles={
+          selectedSquare
+            ? {
+                [selectedSquare]: { backgroundColor: "rgba(255, 255, 0, 0.4)" }, // Highlight the selected square
+                ...game.moves({ square: selectedSquare, verbose: true }).reduce(
+                  (styles, move) => ({
+                    ...styles,
+                    [move.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" }, // Highlight legal moves
+                  }),
+                  {}
+                ),
+              }
+            : {}
+        }
+      /> */}
+      <Button onClick={resetPuzzle}>Reset</Button>
+      <Button onClick={() => selectRandomPuzzle(puzzles)}>New</Button>
+      <Button onClick={showHint}>Hint</Button>
+      <Button onClick={showSolution}>Show Solution</Button>
     </div>
   );
-}
+};
 
-// export default ChessPuzzle;
+export default ChessPuzzle;

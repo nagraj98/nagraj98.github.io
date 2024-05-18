@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import * as ChessJS from "chess.js";
+import { Chessboard } from "react-chessboard";
 import { useAppContext } from "../Context/AppContext";
 
 import GradientText from "../GradientText/GradientText";
@@ -11,9 +11,6 @@ import chessStyles from "./chess.module.css";
 
 const Chess = typeof ChessJS === "function" ? ChessJS : ChessJS.Chess;
 
-const Chessboard = dynamic(() => import("chessboardjsx"), { ssr: false });
-
-// const ChessPuzzle: React.FC = () =>
 export default function ChessPuzzle() {
   const device = useAppContext();
 
@@ -94,6 +91,7 @@ export default function ChessPuzzle() {
     const checkmateMoves = findCheckmateMoves(game);
     const solutionMove = checkmateMoves[0]; // Assume the first checkmate move is the solution
     if (solutionMove) {
+      setHighlightSquares({});
       setHighlightSquares({
         [solutionMove.from]: { backgroundColor: "rgba(0, 0, 255, 0.4)" },
         [solutionMove.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" },
@@ -118,7 +116,7 @@ export default function ChessPuzzle() {
     }
   };
 
-  const handleMove = ({ sourceSquare, targetSquare, piece }) => {
+  const handleMove = (sourceSquare, targetSquare) => {
     try {
       const move = game.move({
         from: sourceSquare,
@@ -133,8 +131,7 @@ export default function ChessPuzzle() {
       if (game.isCheckmate()) {
         if (audio.checkmateSound) audio.checkmateSound.play();
         // alert("Checkmate!");
-        // something;
-        setMessage(`Checkmate ! Wohooo`);
+        setMessage(`Checkmate! Wohooo`);
       } else {
         setMessage(`Good move, but there's one better ! Reset and try again`);
       }
@@ -145,7 +142,7 @@ export default function ChessPuzzle() {
     }
   };
 
-  const handleSquareClick = (square) => {
+  const handleSquareClick = (piece, square) => {
     if (
       selectedSquare &&
       game
@@ -153,7 +150,7 @@ export default function ChessPuzzle() {
         .map((move) => move.to)
         .includes(square)
     ) {
-      handleMove({ sourceSquare: selectedSquare, targetSquare: square });
+      handleMove(selectedSquare, square);
       setSelectedSquare("");
     } else {
       setSelectedSquare(square);
@@ -177,15 +174,25 @@ export default function ChessPuzzle() {
         </div>
 
         <Chessboard
-          width={320}
           position={fen}
-          onDrop={handleMove}
-          orientation={orientation} // Use the state value
-          darkSquareStyle={{ backgroundColor: "purple" }}
-          lightSquareStyle={{ backgroundColor: "orange" }}
-          onSquareClick={handleSquareClick}
-          draggable={true}
-          squareStyles={
+          onPieceDrop={(sourceSquare, targetSquare) => {
+            const success = handleMove(sourceSquare, targetSquare);
+            return success;
+          }}
+          boardOrientation={orientation} // Use the state value
+          boardStyle={{
+            borderRadius: "10px",
+            boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+          }}
+          customDarkSquareStyle={{ backgroundColor: "purple" }}
+          customLightSquareStyle={{ backgroundColor: "orange" }}
+          // onSquareClick={handleSquareClick}
+          arePiecesDraggable={true}
+          customDropSquareStyle={{
+            boxShadow: "inset 0 0 1px 6px rgba(255,255,255,0.75)",
+          }}
+          boardWidth={300}
+          customSquareStyles={
             selectedSquare
               ? {
                   [selectedSquare]: {
@@ -203,9 +210,9 @@ export default function ChessPuzzle() {
                 }
               : {}
           }
+          onPieceClick={handleSquareClick}
         />
         <div className={`${chessStyles.bgrid}`}>
-          {/* <div className={chessStyles.buttonGrid}> */}
           <Button
             bordered
             className={`${buttonStyles.button} ${buttonStyles.customButton}`}
@@ -239,5 +246,3 @@ export default function ChessPuzzle() {
     </div>
   );
 }
-
-// export default ChessPuzzle;
