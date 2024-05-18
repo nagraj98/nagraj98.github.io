@@ -25,6 +25,15 @@ export default function Social() {
           priority
         />
       </a>
+      <a href="https://github.com/nagraj98" target="_blank">
+        <Image
+          src="/images/github.svg"
+          height={20}
+          width={20}
+          alt="Github"
+          priority
+        />
+      </a>
       <a
         href="https://scholar.google.com/citations?user=0TEq0-IAAAAJ&hl=en&oi=ao"
         target="_blank"
@@ -52,15 +61,6 @@ export default function Social() {
         />
       </a>
 
-      <a href="https://github.com/nagraj98" target="_blank">
-        <Image
-          src="/images/github.svg"
-          height={20}
-          width={20}
-          alt="Github"
-          priority
-        />
-      </a>
       <a
         href="mailto:dnagraj998@gmail.com"
         title="Mail to: dnagraj998@gmail.com"

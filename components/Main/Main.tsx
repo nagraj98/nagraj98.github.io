@@ -1,8 +1,10 @@
-import { Text } from "@nextui-org/react";
+// import { Text } from "@nextui-org/react";
 import { useAppContext } from "../Context/AppContext";
 import GradientText from "../GradientText/GradientText";
 import styles from "./main.module.css";
 import Typewriter from "typewriter-effect";
+
+import { Button, Text } from "@nextui-org/react";
 
 export default function Main() {
   const device = useAppContext();
@@ -37,10 +39,10 @@ export default function Main() {
         <Typewriter
           options={{
             strings: [
-              "MS BAIM at Purdue University 🎓",
-              "Philosophy bug",
-              "F1 enthusiast! Go Carlando ❤️",
-              "Intrigued by the smallest of things",
+              "ML at Purdue University 🎓",
+              "Curious 🧠",
+              "Creative 💭",
+              "Solution Oriented 💡",
             ],
             autoStart: true,
             loop: true,
@@ -49,6 +51,59 @@ export default function Main() {
           }}
         />
       </Text>
+      <br />
+      <br />
+
+      <Text
+        h3={device == "lg"}
+        h5={device != "lg"}
+        className={styles.h3}
+        css={{ color: "$gray700" }}
+      >
+        I am currently seeking <strong>full-time</strong> opportunities and will
+        be available to begin new professional challenges in the{" "}
+        <strong>US</strong> from <strong>August 12, 2024</strong>, under{" "}
+        <strong>
+          F1 <em>STEM OPT</em>
+        </strong>{" "}
+        status
+      </Text>
+      <br />
+
+      <Button
+        bordered
+        className={styles.button}
+        // css={{
+        //   // backgroundColor: 'orange',
+        //   color: "white",
+        //   "& a": {
+        //     // Targeting the <a> tag specifically
+        //     color: "white", // Change to your desired color
+        //     textDecoration: "none", // Optional: removes underline from link
+        //   },
+        // }}
+
+        css={{
+          // backgroundColor: "orange",
+          position: "relative",
+          overflow: "hidden",
+          "& a": {
+            color: "transparent",
+            background: "linear-gradient(45deg, orange, purple)",
+            "-webkit-background-clip": "text",
+            "background-clip": "text",
+            textDecoration: "none",
+          },
+        }}
+      >
+        <a
+          href="assets/nagraj_resume_May24.pdf"
+          title="Take a look !"
+          target="_blank"
+        >
+          View Resume
+        </a>
+      </Button>
     </div>
   );
 }
