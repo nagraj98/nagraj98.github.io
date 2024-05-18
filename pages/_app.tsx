@@ -3,7 +3,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { AppWrapper } from "../components/Context/AppContext";
 
 export default function App({ Component, pageProps }) {
-  console.log("Hi there fellow developer! Have a nice day.");
+  console.log("Heya fellow developer! Keep building.");
   const lightTheme = createTheme({
     type: "light",
     theme: {},
