@@ -13,6 +13,7 @@ const Chess = typeof ChessJS === "function" ? ChessJS : ChessJS.Chess;
 
 export default function ChessPuzzle() {
   const device = useAppContext();
+
   const [game, setGame] = useState(new Chess());
   const [fen, setFen] = useState("");
   const [puzzles, setPuzzles] = useState([]);
@@ -22,7 +23,6 @@ export default function ChessPuzzle() {
   const [orientation, setOrientation] = useState("white"); // Default orientation
   const [message, setMessage] = useState("");
   const [highlightSquares, setHighlightSquares] = useState({});
-  const [showPuzzle, setShowPuzzle] = useState(false);
 
   useEffect(() => {
     const moveSound = new Audio("/move-self.mp3");
@@ -49,9 +49,7 @@ export default function ChessPuzzle() {
     setFen(randomPuzzle.fen);
     setSelectedSquare(""); // Clear selection when new puzzle is loaded
     setOrientation(newGame.turn() === "w" ? "white" : "black"); // Set orientation based on turn
-    setMessage(
-      `${orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play`
-    ); // Clear message
+    setMessage(""); // Clear message
     setHighlightSquares({}); // Clear highlights
   };
 
@@ -59,9 +57,8 @@ export default function ChessPuzzle() {
     if (selectedPuzzle) {
       setGame(new Chess(selectedPuzzle.fen));
       setFen(selectedPuzzle.fen);
-      setMessage(
-        `${orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play`
-      );
+      setMessage("");
+      setSelectedSquare("");
       setHighlightSquares({});
     }
   };
@@ -95,6 +92,7 @@ export default function ChessPuzzle() {
     const checkmateMoves = findCheckmateMoves(game);
     const solutionMove = checkmateMoves[0]; // Assume the first checkmate move is the solution
     if (solutionMove) {
+      // setHighlightSquares({});
       setHighlightSquares({
         [solutionMove.from]: { backgroundColor: "rgba(0, 0, 255, 0.4)" },
         [solutionMove.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" },
@@ -104,6 +102,7 @@ export default function ChessPuzzle() {
         `Move ${pieceFullName} from ${solutionMove.from} to ${solutionMove.to}`
       );
     }
+    setSelectedSquare("");
   };
 
   // Update the Hint function to use checkmate moves
@@ -115,6 +114,7 @@ export default function ChessPuzzle() {
       setHighlightSquares({
         [hintMove.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" }, // Highlight the target square
       });
+      setSelectedSquare("");
       setMessage(`Move a piece to ${hintMove.to}`);
     }
   };
@@ -133,7 +133,10 @@ export default function ChessPuzzle() {
 
       if (game.isCheckmate()) {
         if (audio.checkmateSound) audio.checkmateSound.play();
+        // alert("Checkmate!");
         setMessage(`Checkmate! Wohooo`);
+      } else {
+        setMessage(`Good move, but there's one better ! Reset and try again`);
       }
       return true;
     } catch (error) {
@@ -142,7 +145,7 @@ export default function ChessPuzzle() {
     }
   };
 
-  const handleSquareClick = (square) => {
+  const handleSquareClick = (piece, square) => {
     if (
       selectedSquare &&
       game
@@ -161,12 +164,12 @@ export default function ChessPuzzle() {
     const clickHighlights = selectedSquare
       ? {
           [selectedSquare]: {
-            backgroundColor: "rgba(255, 255, 0, 0.4)",
+            backgroundColor: "rgba(255, 255, 0, 0.2)",
           },
           ...game.moves({ square: selectedSquare, verbose: true }).reduce(
             (styles, move) => ({
               ...styles,
-              [move.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" },
+              [move.to]: { backgroundColor: "rgba(0, 255, 0, 0.2)" },
             }),
             {}
           ),
@@ -174,99 +177,84 @@ export default function ChessPuzzle() {
       : {};
 
     return {
-      ...highlightSquares,
       ...clickHighlights,
+      ...highlightSquares,
     };
   };
 
   return (
     <div id="chesspuzzle">
-      {showPuzzle ? (
-        <div className={`${chessStyles.centered} ${chessStyles.fadeIn}`}>
-          <GradientText
-            size={device == "lg" ? "$3xl" : "2xl"} // Adjusted size
-            text="Puzzle - Mate in 1"
-          />
+      <div>
+        <GradientText
+          size={device == "lg" ? "$6xl" : "4xl"}
+          text="Puzzle - Mate in 1"
+        />
 
-          <div className={`${chessStyles.textcenter}`}>
-            {/* <p>
-              {orientation.charAt(0).toUpperCase() + orientation.slice(1)} to
-              play
-            </p> */}
-            <p>{message}</p>
-          </div>
-
-          <div className={`${chessStyles.centered} ${chessStyles.chessboard}`}>
-            <Chessboard
-              position={fen}
-              onPieceDrop={(sourceSquare, targetSquare) => {
-                const success = handleMove(sourceSquare, targetSquare);
-                return success;
-              }}
-              boardOrientation={orientation} // Use the state value
-              boardStyle={{
-                borderRadius: "10px",
-                boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
-              }}
-              customDarkSquareStyle={{ backgroundColor: "purple" }}
-              customLightSquareStyle={{ backgroundColor: "orange" }}
-              customDropSquareStyle={{
-                boxShadow: "inset 0 0 1px 6px rgba(255,255,255,0.75)",
-              }}
-              boardWidth={300}
-              customSquareStyles={getCustomSquareStyles(
-                selectedSquare,
-                highlightSquares,
-                game
-              )}
-              onSquareClick={handleSquareClick}
-              arePiecesDraggable={true}
-            />
-          </div>
-
-          <div className={`${chessStyles.bgrid}`}>
-            <Button
-              bordered
-              className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-              onClick={resetPuzzle}
-            >
-              Reset
-            </Button>
-            <Button
-              bordered
-              className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-              onClick={() => selectRandomPuzzle(puzzles)}
-            >
-              New
-            </Button>
-            <Button
-              bordered
-              className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-              onClick={showHint}
-            >
-              Hint
-            </Button>
-            <Button
-              bordered
-              className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-              onClick={showSolution}
-            >
-              Solution
-            </Button>
-          </div>
+        <div className={`${chessStyles.textcenter}`}>
+          <p>
+            {orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play
+          </p>
+          <p>{message}</p>
         </div>
-      ) : (
-        // <div className={chessStyles.centered} revealbutton>
-        <div className={`${chessStyles.centered} ${chessStyles.revealbutton}`}>
+
+        <Chessboard
+          position={fen}
+          onPieceDrop={(sourceSquare, targetSquare) => {
+            const success = handleMove(sourceSquare, targetSquare);
+            return success;
+          }}
+          boardOrientation={orientation} // Use the state value
+          boardStyle={{
+            borderRadius: "10px",
+            boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+          }}
+          customDarkSquareStyle={{ backgroundColor: "purple" }}
+          customLightSquareStyle={{ backgroundColor: "orange" }}
+          // onSquareClick={handleSquareClick}
+          arePiecesDraggable={true}
+          customDropSquareStyle={{
+            boxShadow: "inset 0 0 1px 6px rgba(255,255,255,0.75)",
+          }}
+          boardWidth={300}
+          customSquareStyles={getCustomSquareStyles(
+            selectedSquare,
+            highlightSquares,
+            game
+          )}
+          onPieceClick={handleSquareClick}
+        />
+
+        <div className={`${chessStyles.bgrid}`}>
           <Button
             bordered
             className={`${buttonStyles.button} ${buttonStyles.customButton}`}
-            onClick={() => setShowPuzzle(true)}
+            onClick={resetPuzzle}
           >
-            Reveal my cool project
+            Reset
+          </Button>
+          <Button
+            bordered
+            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
+            onClick={() => selectRandomPuzzle(puzzles)}
+          >
+            New
+          </Button>
+          <Button
+            bordered
+            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
+            onClick={showHint}
+          >
+            Hint
+          </Button>
+          <Button
+            bordered
+            className={`${buttonStyles.button} ${buttonStyles.customButton}`}
+            onClick={showSolution}
+          >
+            Solution
           </Button>
         </div>
-      )}
+      </div>
     </div>
   );
 }

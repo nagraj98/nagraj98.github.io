@@ -26,7 +26,7 @@
 .main {
   min-height: 100vh;
   width: 90% !important;
-  padding: 10% 0;
+  padding: 0% 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -35,12 +35,19 @@
 
 .content {
   flex: 1;
+  min-height: 100vh;
+  width: 90% !important;
+  padding: 10% 0;
 }
+
+/* .content {
+  flex: 1;
+} */
 
 .chessPuzzle {
   /* margin-left: 20px; */
   /* margin: 10vh; */
 
+  padding: 5% 0;
   max-width: 400px; /* Adjust width as needed */
 }
-

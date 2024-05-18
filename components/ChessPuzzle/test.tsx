@@ -49,9 +49,7 @@ export default function ChessPuzzle() {
     setFen(randomPuzzle.fen);
     setSelectedSquare(""); // Clear selection when new puzzle is loaded
     setOrientation(newGame.turn() === "w" ? "white" : "black"); // Set orientation based on turn
-    setMessage(
-      `${orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play`
-    ); // Clear message
+    setMessage("Lessgo"); // Clear message
     setHighlightSquares({}); // Clear highlights
   };
 
@@ -59,9 +57,7 @@ export default function ChessPuzzle() {
     if (selectedPuzzle) {
       setGame(new Chess(selectedPuzzle.fen));
       setFen(selectedPuzzle.fen);
-      setMessage(
-        `${orientation.charAt(0).toUpperCase() + orientation.slice(1)} to play`
-      );
+      setMessage("Lessgo");
       setHighlightSquares({});
     }
   };
@@ -182,17 +178,17 @@ export default function ChessPuzzle() {
   return (
     <div id="chesspuzzle">
       {showPuzzle ? (
-        <div className={`${chessStyles.centered} ${chessStyles.fadeIn}`}>
+        <div className={chessStyles.centered}>
           <GradientText
-            size={device == "lg" ? "$3xl" : "2xl"} // Adjusted size
+            size={device == "lg" ? "$4xl" : "2xl"} // Adjusted size
             text="Puzzle - Mate in 1"
           />
 
           <div className={`${chessStyles.textcenter}`}>
-            {/* <p>
+            <p>
               {orientation.charAt(0).toUpperCase() + orientation.slice(1)} to
               play
-            </p> */}
+            </p>
             <p>{message}</p>
           </div>
 
@@ -219,7 +215,7 @@ export default function ChessPuzzle() {
                 highlightSquares,
                 game
               )}
-              onSquareClick={handleSquareClick}
+              onPieceClick={handleSquareClick}
               arePiecesDraggable={true}
             />
           </div>
@@ -256,8 +252,7 @@ export default function ChessPuzzle() {
           </div>
         </div>
       ) : (
-        // <div className={chessStyles.centered} revealbutton>
-        <div className={`${chessStyles.centered} ${chessStyles.revealbutton}`}>
+        <div className={chessStyles.centered}>
           <Button
             bordered
             className={`${buttonStyles.button} ${buttonStyles.customButton}`}
