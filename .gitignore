@@ -34,3 +34,6 @@ package-lock.json
 public/favicon.ico
 info.txt
 .vscode/settings.json
+
+# local environment variables
+.env.local

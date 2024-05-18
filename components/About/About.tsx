@@ -47,20 +47,24 @@ export default function About() {
       <GradientText h2 size={device == "lg" ? "$6xl" : "4xl"} text="About Me" />
       <br />
       <Text h4 css={{ color: "$gray700" }} weight="normal" size="$lg">
-        Curious | Creative | Solution Oriented
-        <br />
-        <br />
         Hey there! I am a Data Scientist based in the United States. Currently a
         graduate student at{" "}
         <Link href="https://business.purdue.edu/" target="_blank">
           <GradientText h4 size="$lg" text="Purdue University."></GradientText>
         </Link>
         <br />
-        I am continuously working on creating, evaluating and writing new ideas
-        on my personal blog. I have a special knack for understanding the
-        products & services from a customer's perspective and orienting my ideas
-        and code accordingly. I lookout for challenges and learning
-        opportunities from engineers around me.
+        I crunch numbers, unleash creativity, tell stories and build products. I
+        have a special knack for understanding the business context behind
+        products & services. A strong foundation in statistics and programming,
+        including experience with databases and systems, has consistently fueled
+        my success in delivering enterprise-level insights that drive growth.
+        Now, I'm eager to leverage these skills and enthusiasm for AI and Deep
+        Learning as an AI/ML Engineer, tackling complex problems and
+        contributing to cutting-edge solutions.
+        <br />
+        <br />
+        If you're looking for an analytical mind with a passion for AI and a
+        collaborative spirit, you've found him ! Let's connect!
         <br />
         I have experience with:
         <br />{" "}
@@ -104,19 +108,8 @@ export default function About() {
           />
         </a>
       ))}
+      <br />
 
-      {/* {(device == "lg" || device == "md") && <br />}
-      <div className={styles.listdiv}>
-        <GradientText text="I enjoy &nbsp;" h4 weight="normal" />
-        <Text h4 css={{ color: "$gray700" }} weight="normal" size="$lg">
-          F1 🏎️ &nbsp; Reading 📚 &nbsp; Marvel 🤖 &nbsp; Photography 📷 &nbsp;
-          Dogs 🐶 &nbsp; Running 🏃‍♂️ &nbsp; Treks ⛰️ etc.
-        </Text>
-      </div> */}
-      <Text h4 css={{ color: "$gray700" }} weight="normal" size="$lg">
-        Looking forward to travel more and meet new people! &nbsp; Always in for
-        a chat so feel free to say hi 👋🏻
-      </Text>
       {(device == "sm" || device == "xs") && (
         <>
           {" "}
