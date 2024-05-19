@@ -8,6 +8,7 @@ import GradientText from "../GradientText/GradientText";
 import { Button } from "@nextui-org/react";
 import buttonStyles from "../../styles/buttons.module.css";
 import chessStyles from "./chess.module.css";
+import { Square } from "chess.js";
 
 const Chess = typeof ChessJS === "function" ? ChessJS : ChessJS.Chess;
 
@@ -18,7 +19,9 @@ export default function ChessPuzzle() {
   const [puzzles, setPuzzles] = useState([]);
   const [selectedPuzzle, setSelectedPuzzle] = useState(null);
   const [audio, setAudio] = useState({ moveSound: null, checkmateSound: null });
-  const [selectedSquare, setSelectedSquare] = useState("");
+  // const [selectedSquare, setSelectedSquare] = useState("");
+  const [selectedSquare, setSelectedSquare] = useState<Square | "">("");
+
   const [orientation, setOrientation] = useState("white"); // Default orientation
   const [message, setMessage] = useState("");
   const [highlightSquares, setHighlightSquares] = useState({});
@@ -125,7 +128,7 @@ export default function ChessPuzzle() {
     }
   };
 
-  const handleMove = (sourceSquare, targetSquare) => {
+  const handleMove = (sourceSquare: Square, targetSquare: Square) => {
     try {
       const move = game.move({
         from: sourceSquare,
@@ -148,34 +151,40 @@ export default function ChessPuzzle() {
     }
   };
 
-  const handleSquareClick = (square) => {
+  const handleSquareClick = (square: Square) => {
     if (
       selectedSquare &&
       game
-        .moves({ square: selectedSquare, verbose: true })
+        .moves({ square: selectedSquare as Square, verbose: true })
         .map((move) => move.to)
         .includes(square)
     ) {
-      handleMove(selectedSquare, square);
+      handleMove(selectedSquare as Square, square);
       setSelectedSquare("");
     } else {
       setSelectedSquare(square);
     }
   };
 
-  const getCustomSquareStyles = (selectedSquare, highlightSquares, game) => {
+  const getCustomSquareStyles = (
+    selectedSquare: Square | "",
+    highlightSquares,
+    game
+  ) => {
     const clickHighlights = selectedSquare
       ? {
           [selectedSquare]: {
             backgroundColor: "rgba(255, 255, 0, 0.4)",
           },
-          ...game.moves({ square: selectedSquare, verbose: true }).reduce(
-            (styles, move) => ({
-              ...styles,
-              [move.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" },
-            }),
-            {}
-          ),
+          ...game
+            .moves({ square: selectedSquare as Square, verbose: true })
+            .reduce(
+              (styles, move) => ({
+                ...styles,
+                [move.to]: { backgroundColor: "rgba(0, 255, 0, 0.4)" },
+              }),
+              {}
+            ),
         }
       : {};
 
@@ -206,7 +215,10 @@ export default function ChessPuzzle() {
             <Chessboard
               position={fen}
               onPieceDrop={(sourceSquare, targetSquare) => {
-                const success = handleMove(sourceSquare, targetSquare);
+                const success = handleMove(
+                  sourceSquare as Square,
+                  targetSquare as Square
+                );
                 return success;
               }}
               boardOrientation={orientation} // Use the state value
