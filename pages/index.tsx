@@ -6,10 +6,10 @@ import Layout from "../components/layout";
 import Main from "../components/Main/Main";
 import NavBar from "../components/NavBar/NavBar";
 import Projects from "../components/Projects/Projects";
+// import ChessPuzzle from "../components/ChessPuzzle/ChessPuzzle";
 import Social from "../components/Social/Social";
 import Work from "../components/Work/Work";
 import styles from "./index.module.css";
-import Resume from "../components/Resume/Resume";
 
 export default function Home() {
   const device = useAppContext();
@@ -29,8 +29,8 @@ export default function Home() {
               <About />
               <Work />
               <Projects />
-              {/* <Resume /> */}
               {/* <Education /> */}
+              {/* <ChessPuzzle /> */}
               <Contact />
               <div className={styles.footer}>
                 <div className={styles.line} />
@@ -48,7 +48,7 @@ export default function Home() {
               <About />
               <Work />
               <Projects />
-              {/* <Resume /> */}
+              {/* <ChessPuzzle /> */}
               {/* <Education /> */}
               <Contact />
             </Row>
