@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as ChessJS from "chess.js";
 import { Chessboard } from "react-chessboard";
+// import { Chessboard, BoardOrientation } from "react-chessboard";
+
 import { useAppContext } from "../Context/AppContext";
 
 import GradientText from "../GradientText/GradientText";
@@ -12,6 +14,8 @@ import { Square } from "chess.js";
 
 const Chess = typeof ChessJS === "function" ? ChessJS : ChessJS.Chess;
 
+type BoardOrientation = "white" | "black";
+
 export default function ChessPuzzle() {
   const device = useAppContext();
   const [game, setGame] = useState(new Chess());
@@ -22,7 +26,9 @@ export default function ChessPuzzle() {
   // const [selectedSquare, setSelectedSquare] = useState("");
   const [selectedSquare, setSelectedSquare] = useState<Square | "">("");
 
-  const [orientation, setOrientation] = useState("white"); // Default orientation
+  // const [orientation, setOrientation] = useState("white"); // Default orientation
+  const [orientation, setOrientation] = useState<BoardOrientation>("white");
+
   const [message, setMessage] = useState("");
   const [highlightSquares, setHighlightSquares] = useState({});
   const [showPuzzle, setShowPuzzle] = useState(false);
@@ -222,10 +228,10 @@ export default function ChessPuzzle() {
                 return success;
               }}
               boardOrientation={orientation} // Use the state value
-              boardStyle={{
-                borderRadius: "10px",
-                boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
-              }}
+              // boardStyle={{
+              //   borderRadius: "10px",
+              //   boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
+              // }}
               customDarkSquareStyle={{ backgroundColor: "purple" }}
               customLightSquareStyle={{ backgroundColor: "orange" }}
               customDropSquareStyle={{
