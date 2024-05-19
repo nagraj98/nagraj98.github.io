@@ -108,7 +108,6 @@ export default function About() {
           />
         </a>
       ))}
-      <br />
 
       {(device == "sm" || device == "xs") && (
         <>

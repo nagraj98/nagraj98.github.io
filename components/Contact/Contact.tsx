@@ -2,6 +2,7 @@ import { Button, Text } from "@nextui-org/react";
 import { useAppContext } from "../Context/AppContext";
 import GradientText from "../GradientText/GradientText";
 import styles from "./contact.module.css";
+import buttonStyles from "../../styles/buttons.module.css";
 
 export default function Contact() {
   const device = useAppContext();
@@ -19,31 +20,10 @@ export default function Contact() {
           open!
         </Text>
         <br />
+
         <Button
           bordered
-          className={styles.button}
-          // css={{
-          //   // backgroundColor: 'orange',
-          //   color: "white",
-          //   "& a": {
-          //     // Targeting the <a> tag specifically
-          //     color: "white", // Change to your desired color
-          //     textDecoration: "none", // Optional: removes underline from link
-          //   },
-          // }}
-
-          css={{
-            // backgroundColor: "orange",
-            position: "relative",
-            overflow: "hidden",
-            "& a": {
-              color: "transparent",
-              background: "linear-gradient(45deg, orange, purple)",
-              "-webkit-background-clip": "text",
-              "background-clip": "text",
-              textDecoration: "none",
-            },
-          }}
+          className={`${buttonStyles.button} ${buttonStyles.customButton}`}
         >
           <a
             href="mailto:dnagraj998@gmail.com"
