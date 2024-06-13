@@ -21,9 +21,7 @@ export default function ChessPuzzle() {
   const [puzzles, setPuzzles] = useState([]);
   const [selectedPuzzle, setSelectedPuzzle] = useState(null);
   const [audio, setAudio] = useState({ moveSound: null, checkmateSound: null });
-  // const [selectedSquare, setSelectedSquare] = useState("");
   const [selectedSquare, setSelectedSquare] = useState<Square | "">("");
-  // const [orientation, setOrientation] = useState("white"); // Default orientation
   const [orientation, setOrientation] = useState<BoardOrientation>("white");
   const [message, setMessage] = useState("");
   const [highlightSquares, setHighlightSquares] = useState({});
@@ -201,15 +199,11 @@ export default function ChessPuzzle() {
       {showPuzzle ? (
         <div className={`${chessStyles.centered} ${chessStyles.fadeIn}`}>
           <GradientText
-            size={device == "lg" ? "$3xl" : "2xl"} // Adjusted size
+            size={device == "lg" ? "$3xl" : "2xl"}
             text="Puzzle - Mate in 1"
           />
 
           <div className={`${chessStyles.textcenter}`}>
-            {/* <p>
-              {orientation.charAt(0).toUpperCase() + orientation.slice(1)} to
-              play
-            </p> */}
             <p>{message}</p>
           </div>
 
@@ -224,10 +218,6 @@ export default function ChessPuzzle() {
                 return success;
               }}
               boardOrientation={orientation} // Use the state value
-              // boardStyle={{
-              //   borderRadius: "10px",
-              //   boxShadow: `0 5px 15px rgba(0, 0, 0, 0.5)`,
-              // }}
               customDarkSquareStyle={{ backgroundColor: "purple" }}
               customLightSquareStyle={{ backgroundColor: "orange" }}
               customDropSquareStyle={{
@@ -276,7 +266,6 @@ export default function ChessPuzzle() {
           </div>
         </div>
       ) : (
-        // <div className={chessStyles.centered} revealbutton>
         <div className={`${chessStyles.centered} ${chessStyles.revealbutton}`}>
           <Button
             bordered

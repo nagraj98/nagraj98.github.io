@@ -1,4 +1,3 @@
-// import { Text } from "@nextui-org/react";
 import { useAppContext } from "../Context/AppContext";
 import GradientText from "../GradientText/GradientText";
 import styles from "./main.module.css";
@@ -7,14 +6,13 @@ import ChessPuzzle from "../ChessPuzzle/ChessPuzzle";
 
 import { Button, Text } from "@nextui-org/react";
 
-export default function Main() {
-  const device = useAppContext();
+export default function Main({ device }) {
   return (
     <div className={styles.main} id="home">
       <div className={styles.content}>
         <Text
-          h3={device == "lg"}
-          h5={device != "lg"}
+          h3={device === "lg"}
+          h5={device !== "lg"}
           className={styles.h3}
           css={{ color: "$gray700" }}
         >
@@ -23,13 +21,13 @@ export default function Main() {
         <GradientText
           text="Nagraj"
           h2
-          size={device == "lg" ? "$8xl" : "6xl"}
-          className={device == "lg" ? styles.h1 : styles.h1small}
+          size={device === "lg" ? "$8xl" : "6xl"}
+          className={device === "lg" ? styles.h1 : styles.h1small}
           weight="semibold"
         />
         <Text
-          h2={device == "lg"}
-          h5={device != "lg"}
+          h2={device === "lg"}
+          h5={device !== "lg"}
           size={device === "lg" ? "$2xl" : "$xl"}
           css={{
             color: "$gray700",
@@ -57,19 +55,18 @@ export default function Main() {
         <br />
 
         <Text
-          h3={device == "lg"}
-          h5={device != "lg"}
+          h3={device === "lg"}
+          h5={device !== "lg"}
           className={styles.h3}
           css={{ color: "$gray700" }}
         >
           I am currently seeking <strong>full-time</strong> opportunities and
           will be available to begin new professional challenges in the{" "}
-          <strong>United States</strong> from <strong>September 3, 2024</strong>
-          , under{" "}
+          <strong>US</strong> from <strong>September 3, 2024</strong>, under{" "}
           <strong>
             F1 <em>OPT</em>
           </strong>{" "}
-          status
+          visa status
         </Text>
         <br />
 
@@ -95,14 +92,18 @@ export default function Main() {
             href="assets/nagraj_resume_June2024.pdf"
             title="Take a look !"
             target="_blank"
+            rel="noopener noreferrer"
           >
             View Resume
           </a>
         </Button>
       </div>
-      <div className={styles.chessPuzzle}>
-        <ChessPuzzle />
-      </div>
+      {device !== "sm" &&
+        device !== "xs" && ( // Conditionally render ChessPuzzle based on device
+          <div className={styles.chessPuzzle}>
+            <ChessPuzzle />
+          </div>
+        )}
     </div>
   );
 }

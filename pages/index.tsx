@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import Main from "../components/Main/Main";
 import NavBar from "../components/NavBar/NavBar";
 import Projects from "../components/Projects/Projects";
-// import ChessPuzzle from "../components/ChessPuzzle/ChessPuzzle";
+import ChessPuzzle from "../components/ChessPuzzle/ChessPuzzle";
 import Social from "../components/Social/Social";
 import Work from "../components/Work/Work";
 import styles from "./index.module.css";
@@ -19,18 +19,16 @@ export default function Home() {
         <Row className={styles.navRow}>
           <NavBar />
         </Row>
-        {device == "lg" || device == "md" ? (
+        {device === "lg" || device === "md" ? (
           <Row className={styles.bodyRow}>
-            <Col span={device == "lg" ? 1 : 2}>
+            <Col span={device === "lg" ? 1 : 2}>
               <Social />
             </Col>
-            <Col span={device == "lg" ? 11 : 10} className={styles.main}>
-              <Main />
+            <Col span={device === "lg" ? 11 : 10} className={styles.main}>
+              <Main device={device} />
               <About />
               <Work />
               <Projects />
-              {/* <Education /> */}
-              {/* <ChessPuzzle /> */}
               <Contact />
               <div className={styles.footer}>
                 <div className={styles.line} />
@@ -44,12 +42,11 @@ export default function Home() {
         ) : (
           <Row className={styles.mowBodyRow}>
             <Row className={styles.mowMain}>
-              <Main />
+              <Main device={device} />
+              <ChessPuzzle /> {/* ChessPuzzle after Main for mobile devices */}
               <About />
               <Work />
               <Projects />
-              {/* <ChessPuzzle /> */}
-              {/* <Education /> */}
               <Contact />
             </Row>
             <Row className={styles.mowSocial}>
