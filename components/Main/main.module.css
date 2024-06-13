@@ -1,28 +1,27 @@
 .main {
   min-height: 100vh;
   width: 90% !important;
-  padding: 0% 0;
+  padding: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .main {
-    padding: 50% 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 }
-.h1 {
+
+.h1, .h1small {
   padding: 0;
   margin: 10px 0;
   line-height: initial;
 }
-.h1small {
-  padding: 0;
-  margin: 10px 0;
-  line-height: initial;
-}
+
 .h3 {
   padding: 0;
   margin: 0;
@@ -31,15 +30,35 @@
 .content {
   flex: 1;
   min-height: 100vh;
-  width: 30% !important;
+  width: 100% !important;
   padding: 5% 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 60% !important;
+    padding: 5% 0;
+  }
 }
 
 .chessPuzzle {
-  /* margin-left: 20px; */
-  /* margin: 10vh; */
   flex: 1;
   padding: 5% 0;
-  max-width: 400px; /* Adjust width as needed */
-  width: 30% !important;
+  max-width: 400px;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .chessPuzzle {
+    width: 30% !important;
+    margin-top: 0;
+  }
 }
