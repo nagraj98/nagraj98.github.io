@@ -11,8 +11,3 @@ Inspired by <a href="https://brittanychiang.com/">Brittany Chiang</a>
 </p>
 <br />
 <img src="https://github.com/nagraj98/jargan-portfolio/blob/main/public/images/Website.png" />
-
-
-<a target="_blank" href="assets/img/Nagarjuna_Chidarala_CCV_5.pdf" classname="btn btn-contained" download="">
-                <button type="button" class="btn btn-primary">Download Resume</button>
-              </a>

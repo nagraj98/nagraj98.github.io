@@ -74,7 +74,7 @@ export default function Social() {
         />
       </a>
 
-      <a href="assets/nagraj_resume_May24.pdf" target="_blank">
+      <a href="assets/nagraj_resume_June2024.pdf" target="_blank">
         <Image
           src="/images/cv.svg"
           height={20}

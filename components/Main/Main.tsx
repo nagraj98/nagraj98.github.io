@@ -64,9 +64,10 @@ export default function Main() {
         >
           I am currently seeking <strong>full-time</strong> opportunities and
           will be available to begin new professional challenges in the{" "}
-          <strong>US</strong> from <strong>August 12, 2024</strong>, under{" "}
+          <strong>United States</strong> from <strong>September 3, 2024</strong>
+          , under{" "}
           <strong>
-            F1 <em>STEM OPT</em>
+            F1 <em>OPT</em>
           </strong>{" "}
           status
         </Text>
@@ -91,7 +92,7 @@ export default function Main() {
           }}
         >
           <a
-            href="assets/nagraj_resume_May24.pdf"
+            href="assets/nagraj_resume_June2024.pdf"
             title="Take a look !"
             target="_blank"
           >
