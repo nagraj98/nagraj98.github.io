@@ -3,4 +3,5 @@ module.exports = {
         locales: ['en'],
         defaultLocale: 'en',
     },
+    output: "export",  // <=== enables static exports
 };
