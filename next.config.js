@@ -1,7 +1,7 @@
+const isProd = process.env.NODE_ENV === 'production';
+const repoName = 'portfolio';
+
 module.exports = {
-    i18n: {
-        locales: ['en'],
-        defaultLocale: 'en',
-    },
-    output: "export",  // <=== enables static exports
+  output: 'export',
+  basePath: isProd ? `/${repoName}` : '',
 };
